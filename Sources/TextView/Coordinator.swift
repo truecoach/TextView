@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView.Representable {
-    public final class Coordinator: NSObject, UITextViewDelegate {
+    final class Coordinator: NSObject, UITextViewDelegate {
 
         internal let textView: UIKitTextView
 
@@ -13,7 +13,7 @@ extension TextView.Representable {
         var onEditingChanged: ((Coordinator) -> Void)?
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
 
-        public init(text: Binding<NSAttributedString>,
+        init(text: Binding<NSAttributedString>,
              calculatedHeight: Binding<CGFloat>,
              shouldEditInRange: ((Range<String.Index>, String) -> Bool)?,
              onEditingChanged: ((Coordinator) -> Void)?,
@@ -110,7 +110,7 @@ extension TextView.Representable.Coordinator {
         textView.setNeedsDisplay()
     }
 
-    private func recalculateHeight() {
+    func recalculateHeight() {
         let newSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: .greatestFiniteMagnitude))
         guard calculatedHeight.wrappedValue != newSize.height else { return }
 
