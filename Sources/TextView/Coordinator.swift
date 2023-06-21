@@ -13,7 +13,7 @@ extension TextView.Representable {
         var onEditingChanged: ((Coordinator) -> Void)?
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
 
-        init(text: Binding<NSAttributedString>,
+        public init(text: Binding<NSAttributedString>,
              calculatedHeight: Binding<CGFloat>,
              shouldEditInRange: ((Range<String.Index>, String) -> Bool)?,
              onEditingChanged: ((Coordinator) -> Void)?,
