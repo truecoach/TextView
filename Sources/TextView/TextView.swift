@@ -10,7 +10,7 @@ public struct TextView: View {
 
     @State private var calculatedHeight: CGFloat = 44
 
-    private var onEditingChanged: ((Coordinator) -> Void)?
+    private var onEditingChanged: ((TextView.Representable.Coordinator) -> Void)?
     private var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
     private var onCommit: (() -> Void)?
 
