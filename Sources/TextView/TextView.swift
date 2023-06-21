@@ -40,7 +40,7 @@ public struct TextView: View {
     ///   - shouldEditInRange: A closure that's called before an edit it applied, allowing the consumer to prevent the change
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
-    public init(_ text: Binding<String>,
+    init(_ text: Binding<String>,
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
          onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
          onCommit: (() -> Void)? = nil
@@ -67,7 +67,7 @@ public struct TextView: View {
     ///   - text: A binding to the attributed text
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
-    public init(_ text: Binding<NSAttributedString>,
+    init(_ text: Binding<NSAttributedString>,
                 onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
                 onCommit: (() -> Void)? = nil
     ) {
