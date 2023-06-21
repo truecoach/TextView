@@ -10,7 +10,7 @@ public struct TextView: View {
 
     @State private var calculatedHeight: CGFloat = 44
 
-    private var onEditingChanged: (() -> Void)?
+    private var onEditingChanged: ((Coordinator) -> Void)?
     private var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
     private var onCommit: (() -> Void)?
 
@@ -38,7 +38,7 @@ public struct TextView: View {
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<String>,
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
-         onEditingChanged: (() -> Void)? = nil,
+         onEditingChanged: ((Coordinator) -> Void)? = nil,
          onCommit: (() -> Void)? = nil
     ) {
         _text = Binding(
@@ -64,7 +64,7 @@ public struct TextView: View {
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<NSAttributedString>,
-                onEditingChanged: (() -> Void)? = nil,
+                onEditingChanged: ((Coordinator) -> Void)? = nil,
                 onCommit: (() -> Void)? = nil
     ) {
         _text = text
