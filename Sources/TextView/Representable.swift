@@ -25,11 +25,11 @@ extension TextView {
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
         var onCommit: (() -> Void)?
 
-        func makeUIView(context: Context) -> UIKitTextView {
+        public func makeUIView(context: Context) -> UIKitTextView {
             context.coordinator.textView
         }
 
-        func updateUIView(_ view: UIKitTextView, context: Context) {
+        public func updateUIView(_ view: UIKitTextView, context: Context) {
             context.coordinator.update(representable: self)
         }
 
