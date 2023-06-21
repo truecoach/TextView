@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView {
-    public struct Representable: UIViewRepresentable {
+    struct Representable: UIViewRepresentable {
 
         @Binding var text: NSAttributedString
         @Binding var calculatedHeight: CGFloat
@@ -25,15 +25,15 @@ extension TextView {
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
         var onCommit: (() -> Void)?
 
-        public func makeUIView(context: Context) -> UIKitTextView {
+        func makeUIView(context: Context) -> UIKitTextView {
             context.coordinator.textView
         }
 
-        public func updateUIView(_ view: UIKitTextView, context: Context) {
+        func updateUIView(_ view: UIKitTextView, context: Context) {
             context.coordinator.update(representable: self)
         }
 
-        @discardableResult public func makeCoordinator() -> Coordinator {
+        @discardableResult func makeCoordinator() -> Coordinator {
             Coordinator(
                 text: $text,
                 calculatedHeight: $calculatedHeight,
