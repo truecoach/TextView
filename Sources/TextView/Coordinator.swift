@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView.Representable {
-    final class Coordinator: NSObject, UITextViewDelegate {
+    public final class Coordinator: NSObject, UITextViewDelegate {
 
         internal let textView: UIKitTextView
 
