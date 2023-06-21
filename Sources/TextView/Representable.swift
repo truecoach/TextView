@@ -21,7 +21,7 @@ extension TextView {
         var autoDetectionTypes: UIDataDetectorTypes = []
         var allowsRichText: Bool
 
-        var onEditingChanged: ((Coordinator) -> Void)?
+        var onEditingChanged: ((TextViewProtocol) -> Void)?
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
         var onCommit: (() -> Void)?
 
