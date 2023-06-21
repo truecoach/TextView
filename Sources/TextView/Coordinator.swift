@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView.Representable {
-    final class Coordinator: NSObject, UITextViewDelegate, TextViewProtocol {
+    final class Coordinator: NSObject, UITextViewDelegate {
 
         internal let textView: UIKitTextView
 
@@ -65,7 +65,11 @@ extension TextView.Representable {
 
 }
 
-extension TextView.Representable.Coordinator {
+extension TextView.Representable.Coordinator: TextViewProtocol {
+
+    public var height: CGFloat {
+        return calculatedHeight.wrappedValue
+    }
 
     func update(representable: TextView.Representable) {
         textView.attributedText = representable.text
