@@ -1,7 +1,7 @@
 import SwiftUI
 
 public protocol TextViewProtocol {
-    public var height: CGFloat
+    var height: CGFloat
 }
 
 /// A SwiftUI TextView implementation that supports both scrolling and auto-sizing layouts
