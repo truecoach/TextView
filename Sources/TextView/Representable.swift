@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView {
-    struct Representable: UIViewRepresentable {
+    public struct Representable: UIViewRepresentable {
 
         @Binding var text: NSAttributedString
         @Binding var calculatedHeight: CGFloat
