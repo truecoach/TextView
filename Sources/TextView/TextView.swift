@@ -1,5 +1,9 @@
 import SwiftUI
 
+public protocol TextViewProtocol {
+    public var calculatedHeight: CGFloat
+}
+
 /// A SwiftUI TextView implementation that supports both scrolling and auto-sizing layouts
 public struct TextView: View {
 
@@ -10,7 +14,7 @@ public struct TextView: View {
 
     @State private var calculatedHeight: CGFloat = 44
 
-    private var onEditingChanged: ((TextView.Representable.Coordinator) -> Void)?
+    private var onEditingChanged: ((TextViewProtocol) -> Void)?
     private var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
     private var onCommit: (() -> Void)?
 
@@ -38,7 +42,7 @@ public struct TextView: View {
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<String>,
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
-         onEditingChanged: ((TextView.Representable.Coordinator) -> Void)? = nil,
+         onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
          onCommit: (() -> Void)? = nil
     ) {
         _text = Binding(
@@ -64,7 +68,7 @@ public struct TextView: View {
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<NSAttributedString>,
-                onEditingChanged: ((TextView.Representable.Coordinator) -> Void)? = nil,
+                onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
                 onCommit: (() -> Void)? = nil
     ) {
         _text = text
