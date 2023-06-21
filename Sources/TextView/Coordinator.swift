@@ -10,13 +10,13 @@ extension TextView.Representable {
         private var calculatedHeight: Binding<CGFloat>
 
         var onCommit: (() -> Void)?
-        var onEditingChanged: (() -> Void)?
+        var onEditingChanged: ((Coordinator) -> Void)?
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
 
         init(text: Binding<NSAttributedString>,
              calculatedHeight: Binding<CGFloat>,
              shouldEditInRange: ((Range<String.Index>, String) -> Bool)?,
-             onEditingChanged: (() -> Void)?,
+             onEditingChanged: ((Coordinator) -> Void)?,
              onCommit: (() -> Void)?
         ) {
             textView = UIKitTextView()
@@ -40,7 +40,7 @@ extension TextView.Representable {
         func textViewDidChange(_ textView: UITextView) {
             text.wrappedValue = NSAttributedString(attributedString: textView.attributedText)
             recalculateHeight()
-            onEditingChanged?()
+            onEditingChanged?(self)
         }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
