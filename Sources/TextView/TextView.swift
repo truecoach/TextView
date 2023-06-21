@@ -38,7 +38,7 @@ public struct TextView: View {
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<String>,
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
-         onEditingChanged: ((Coordinator) -> Void)? = nil,
+         onEditingChanged: ((TextView.Representable.Coordinator) -> Void)? = nil,
          onCommit: (() -> Void)? = nil
     ) {
         _text = Binding(
@@ -64,7 +64,7 @@ public struct TextView: View {
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<NSAttributedString>,
-                onEditingChanged: ((Coordinator) -> Void)? = nil,
+                onEditingChanged: ((TextView.Representable.Coordinator) -> Void)? = nil,
                 onCommit: (() -> Void)? = nil
     ) {
         _text = text
