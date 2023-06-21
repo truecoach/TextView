@@ -33,7 +33,7 @@ extension TextView {
             context.coordinator.update(representable: self)
         }
 
-        @discardableResult func makeCoordinator() -> Coordinator {
+        @discardableResult public func makeCoordinator() -> Coordinator {
             Coordinator(
                 text: $text,
                 calculatedHeight: $calculatedHeight,
