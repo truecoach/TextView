@@ -16,6 +16,13 @@ public extension TextView {
         self.placeholder(placeholder) { $0 }
     }
 
+    /// Set alignment for main frame
+    func alignment(_ alignment: Alignment) -> TextView {
+        var view = self
+        view.alignment = alignment
+        return view
+    }
+
     /// Specify a placeholder with the specified configuration
     ///
     /// Example:
