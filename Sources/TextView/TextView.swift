@@ -1,4 +1,4 @@
-import SwiftUI
+ ,import SwiftUI
 
 /// A SwiftUI TextView implementation that supports both scrolling and auto-sizing layouts
 public struct TextView: View {
@@ -29,6 +29,7 @@ public struct TextView: View {
     var enablesReturnKeyAutomatically: Bool?
     var autoDetectionTypes: UIDataDetectorTypes = []
     var allowRichText: Bool
+    var alignment: Alignment = .center
 
     /// Makes a new TextView with the specified configuration
     /// - Parameters:
@@ -103,7 +104,8 @@ public struct TextView: View {
         )
         .frame(
             minHeight: isScrollingEnabled ? 0 : calculatedHeight,
-            maxHeight: isScrollingEnabled ? .infinity : calculatedHeight
+            maxHeight: isScrollingEnabled ? .infinity : calculatedHeight,
+            alignment: alignment
         )
         .background(
             placeholderView?
