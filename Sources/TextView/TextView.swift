@@ -1,4 +1,4 @@
-import SwiftUI
+nimport SwiftUI
 
 public protocol TextViewProtocol {
     var height: CGFloat { get }
@@ -33,6 +33,7 @@ public struct TextView: View {
     var enablesReturnKeyAutomatically: Bool?
     var autoDetectionTypes: UIDataDetectorTypes = []
     var allowRichText: Bool
+    var alignment: Alignemnt = .center
 
     /// Makes a new TextView with the specified configuration
     /// - Parameters:
@@ -107,7 +108,8 @@ public struct TextView: View {
         )
         .frame(
             minHeight: isScrollingEnabled ? 0 : calculatedHeight,
-            maxHeight: isScrollingEnabled ? .infinity : calculatedHeight
+            maxHeight: isScrollingEnabled ? .infinity : calculatedHeight,
+            alignment: alignment
         )
         .background(
             placeholderView?
