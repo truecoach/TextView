@@ -1,4 +1,4 @@
-nimport SwiftUI
+import SwiftUI
 
 public protocol TextViewProtocol {
     var height: CGFloat { get }
