@@ -33,7 +33,7 @@ public struct TextView: View {
     var enablesReturnKeyAutomatically: Bool?
     var autoDetectionTypes: UIDataDetectorTypes = []
     var allowRichText: Bool
-    var alignment: Alignemnt = .center
+    var alignment: Alignment = .center
 
     /// Makes a new TextView with the specified configuration
     /// - Parameters:
