@@ -17,7 +17,7 @@ public extension TextView {
     }
 
     /// Set alignment for main frame
-    func alignment(_ alignment: Alignment) -> TextView {
+    func setAlignment(_ alignment: Alignment) -> TextView {
         var view = self
         view.alignment = alignment
         return view
