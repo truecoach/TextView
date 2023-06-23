@@ -15,7 +15,7 @@ extension TextView.Representable {
 
         init(text: Binding<NSAttributedString>,
              calculatedHeight: Binding<CGFloat>,
-             shouldEditInRange: ((Range<String.Index>, String) -> Bool)?,
+             shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?,
              onEditingChanged: ((TextViewProtocol) -> Void)?,
              onCommit: (() -> Void)?
         ) {
