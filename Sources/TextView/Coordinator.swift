@@ -8,7 +8,6 @@ extension TextView.Representable {
         private var originalText: NSAttributedString = .init()
         private var text: Binding<NSAttributedString>
         private var calculatedHeight: Binding<CGFloat>
-        private var cursorPosition: Int? = nil
 
         var onCommit: (() -> Void)?
         var onEditingChanged: ((TextViewProtocol) -> Void)?
@@ -42,18 +41,9 @@ extension TextView.Representable {
             text.wrappedValue = NSAttributedString(attributedString: textView.attributedText)
             recalculateHeight()
             onEditingChanged?(self)
-
-            // Move cursor back after typed
-            if let pos = cursorPosition, let startPosition = textView.position(from: textView.beginningOfDocument, offset: pos) {
-                textView.selectedTextRange = textView.textRange(from: startPosition, to: startPosition)
-            }
-            cursorPosition = nil
         }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            // Save cursor position
-            cursorPosition = max(0, range.location + (text.isEmpty ? -2 : 0))
-            
             if onCommit != nil, text == "\n" {
                 onCommit?()
                 originalText = NSAttributedString(attributedString: textView.attributedText)
@@ -86,7 +76,6 @@ extension TextView.Representable.Coordinator: TextViewProtocol {
     }
 
     func update(representable: TextView.Representable) {
-        textView.attributedText = representable.text
         textView.font = representable.font
         textView.adjustsFontForContentSizeCategory = true
         textView.textColor = representable.foregroundColor
