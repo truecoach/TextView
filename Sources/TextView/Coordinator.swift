@@ -51,8 +51,8 @@ extension TextView.Representable {
                 return false
             }
 
-            if shouldEditInRange != nil {
-                return shouldEditInRange?(Range(range, in: text), text)
+            if let shouldEditInRange = shouldEditInRange {
+                return shouldEditInRange(Range(range, in: text) ?? 0...0, text)
             }
 
             return true
