@@ -52,7 +52,7 @@ extension TextView.Representable {
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             // Save cursor position
-            cursorPosition = max(0, range.location - (text.isEmpty ? 1 : 1))
+            cursorPosition = max(0, range.location + (text.isEmpty ? -2 : 0))
             
             if onCommit != nil, text == "\n" {
                 onCommit?()
