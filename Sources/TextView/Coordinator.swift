@@ -51,6 +51,10 @@ extension TextView.Representable {
                 return false
             }
 
+            if shouldEditInRange != nil {
+                return shouldEditInRange?(range, text)
+            }
+
             return true
         }
 
