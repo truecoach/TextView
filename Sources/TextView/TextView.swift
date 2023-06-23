@@ -15,7 +15,7 @@ public struct TextView: View {
     @State private var calculatedHeight: CGFloat = 44
 
     private var onEditingChanged: ((TextViewProtocol) -> Void)?
-    private var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
+    private var shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?
     private var onCommit: (() -> Void)?
 
     var placeholderView: AnyView?
