@@ -8,7 +8,7 @@ extension TextView.Representable {
         private var originalText: NSAttributedString = .init()
         private var text: Binding<NSAttributedString>
         private var calculatedHeight: Binding<CGFloat>
-        private var backspacePosition: Int? = nil
+        private var cursorPosition: Int? = nil
 
         var onCommit: (() -> Void)?
         var onEditingChanged: ((TextViewProtocol) -> Void)?
@@ -42,14 +42,17 @@ extension TextView.Representable {
             text.wrappedValue = NSAttributedString(attributedString: textView.attributedText)
             recalculateHeight()
             onEditingChanged?(self)
+
+            // Move cursor back after typed
+            if let pos = cursorPosition, let startPosition = textView.position(from: textView.beginningOfDocument, offset: pos) {
+                textView.selectedTextRange = textView.textRange(from: startPosition, to: startPosition)
+            }
+            cursorPosition = nil
         }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            if text.isEmpty {
-                backspacePosition = max(0, range.location - 1)
-            } else {
-                backspacePosition = nil
-            }
+            // Save cursor position
+            cursorPosition = max(0, range.location - (text.isEmpty ? 1 : 1))
             
             if onCommit != nil, text == "\n" {
                 onCommit?()
@@ -70,12 +73,6 @@ extension TextView.Representable {
             if onCommit != nil {
                 text.wrappedValue = originalText
             }
-
-            // Move cursor back if deleted
-            if let pos = backspacePosition, let startPosition = textView.position(from: textView.beginningOfDocument, offset: pos) {
-                textView.selectedTextRange = textView.textRange(from: startPosition, to: startPosition)
-            }
-            backspacePosition = nil
         }
 
     }
