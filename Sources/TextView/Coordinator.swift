@@ -40,7 +40,7 @@ extension TextView.Representable {
         func textViewDidChange(_ textView: UITextView) {
             let style = NSMutableParagraphStyle()
             style.lineSpacing = 40
-            let attributes = [NSParagraphStyleAttributeName : style]
+            let attributes = [NSAttributedString.Key.paragraphStyle : style]
             
             text.wrappedValue = NSAttributedString(attributedString: textView.attributedText, attributes: attributes)
             recalculateHeight()
