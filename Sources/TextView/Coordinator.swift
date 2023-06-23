@@ -8,6 +8,7 @@ extension TextView.Representable {
         private var originalText: NSAttributedString = .init()
         private var text: Binding<NSAttributedString>
         private var calculatedHeight: Binding<CGFloat>
+        private var backspacePosition: Int? = nil
 
         var onCommit: (() -> Void)?
         var onEditingChanged: ((TextViewProtocol) -> Void)?
@@ -44,6 +45,12 @@ extension TextView.Representable {
         }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if text.isEmpty {
+                backspacePosition = max(0, range.location - 1)
+            } else {
+                backspacePosition = nil
+            }
+            
             if onCommit != nil, text == "\n" {
                 onCommit?()
                 originalText = NSAttributedString(attributedString: textView.attributedText)
@@ -63,6 +70,12 @@ extension TextView.Representable {
             if onCommit != nil {
                 text.wrappedValue = originalText
             }
+
+            // Move cursor back if deleted
+            if let pos = backspacePosition, let startPosition = textView.position(from: textView.beginningOfDocument, offset: pos) {
+                textView.selectedTextRange = textView.textRange(from: startPosition, to: startPosition)
+            }
+            backspacePosition = nil
         }
 
     }
