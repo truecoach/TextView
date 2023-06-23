@@ -42,7 +42,7 @@ public struct TextView: View {
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<String>,
-         shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
+         shouldEditInRange: ((Range<String.Index>?, String) -> Bool)? = nil,
          onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
          onCommit: (() -> Void)? = nil
     ) {
