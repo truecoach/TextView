@@ -52,7 +52,7 @@ public struct TextView: View {
         let attributes = [NSAttributedString.Key.paragraphStyle : style]
 
         _text = Binding(
-            get: { NSAttributedString(string: text.wrappedValue, attributes: attributes) },
+            get: { NSAttributedString(string: text.wrappedValue /*, attributes: attributes*/) },
             set: { text.wrappedValue = $0.string }
         )
 
