@@ -42,12 +42,17 @@ public struct TextView: View {
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<String>,
+         lineSpacing: Int = 40
          shouldEditInRange: ((Range<String.Index>?, String) -> Bool)? = nil,
          onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
          onCommit: (() -> Void)? = nil
     ) {
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = lineSpacing
+        let attributes = [NSAttributedString.Key.paragraphStyle : style]
+
         _text = Binding(
-            get: { NSAttributedString(string: text.wrappedValue) },
+            get: { NSAttributedString(string: text.wrappedValue, attributes: attributes) },
             set: { text.wrappedValue = $0.string }
         )
 
