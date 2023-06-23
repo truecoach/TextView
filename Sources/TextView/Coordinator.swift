@@ -52,7 +52,7 @@ extension TextView.Representable {
             }
 
             if let shouldEditInRange = shouldEditInRange {
-                return shouldEditInRange(Range(range, in: text) ?? 0...0, text)
+                return shouldEditInRange(Range(range, in: text), text)
             }
 
             return true
