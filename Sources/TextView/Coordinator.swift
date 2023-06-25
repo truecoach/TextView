@@ -76,6 +76,9 @@ extension TextView.Representable.Coordinator: TextViewProtocol {
     }
 
     func update(representable: TextView.Representable) {
+        let range = textView.selectedRange // Save cursor (accidentally moved to end by update)
+        textView.attributedText = representable.text
+        textView.selectedRange = range // Restore cursor        
         textView.font = representable.font
         textView.adjustsFontForContentSizeCategory = true
         textView.textColor = representable.foregroundColor
