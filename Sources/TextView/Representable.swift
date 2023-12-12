@@ -13,6 +13,7 @@ extension TextView {
         let returnKeyType: UIReturnKeyType?
         let clearsOnInsertion: Bool
         let autocorrection: UITextAutocorrectionType
+        let spellCheck: UITextSpellCheckingType
         let truncationMode: NSLineBreakMode
         let isEditable: Bool
         let isSelectable: Bool

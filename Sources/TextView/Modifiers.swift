@@ -111,6 +111,14 @@ public extension TextView {
         return view
     }
 
+    /// Enables spell checking
+    /// - Parameter isSpellCheckEnabled: If true, spell checking will be enabled
+    func enableSpellCheck(_ isSpellCheckEnabled: Bool) -> TextView {
+        var view = self
+        view.spellCheck = isSpellCheckEnabled ? .yes : .no
+        return view
+    }
+
     /// Specifies whether the text can be edited
     /// - Parameter isEditable: If true, the text can be edited via the user's keyboard
     func isEditable(_ isEditable: Bool) -> TextView {
