@@ -84,6 +84,7 @@ extension TextView.Representable.Coordinator: TextViewProtocol {
         textView.textColor = representable.foregroundColor
         textView.autocapitalizationType = representable.autocapitalization
         textView.autocorrectionType = representable.autocorrection
+        textView.spellCheckingType = representable.spellCheck
         textView.isEditable = representable.isEditable
         textView.isSelectable = representable.isSelectable
         textView.isScrollEnabled = representable.isScrollingEnabled
