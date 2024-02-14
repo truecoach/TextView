@@ -119,6 +119,14 @@ public extension TextView {
         return view
     }
 
+    /// Enables input accessory views. eg done button
+    /// - Parameter shouldDisplayAccessoryView: If true, spell checking will be enabled
+    func displayAccessoryView(_ shouldDisplayAccessoryView: Bool) -> TextView {
+        var view = self
+        view.shouldDisplayAccessoryView = shouldDisplayAccessoryView ? true : false
+        return view
+    }
+
     /// Specifies whether the text can be edited
     /// - Parameter isEditable: If true, the text can be edited via the user's keyboard
     func isEditable(_ isEditable: Bool) -> TextView {
