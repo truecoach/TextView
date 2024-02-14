@@ -90,6 +90,14 @@ extension TextView.Representable.Coordinator: TextViewProtocol {
         textView.isScrollEnabled = representable.isScrollingEnabled
         textView.dataDetectorTypes = representable.autoDetectionTypes
         textView.allowsEditingTextAttributes = representable.allowsRichText
+        if representable.shouldDisplayAccessoryView {
+            let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
+            let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped(button:)))
+            toolBar.backgroundColor = UIColor.white
+            toolBar.items = [flexSpace, doneButton]
+            textView.inputAccessoryView = toolBar
+        }
 
         switch representable.multilineTextAlignment {
         case .leading:
@@ -130,4 +138,7 @@ extension TextView.Representable.Coordinator: TextViewProtocol {
         }
     }
 
+    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

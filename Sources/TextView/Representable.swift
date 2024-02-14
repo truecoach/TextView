@@ -1,4 +1,6 @@
+import Foundation
 import SwiftUI
+
 
 extension TextView {
     struct Representable: UIViewRepresentable {
@@ -12,6 +14,7 @@ extension TextView {
         let font: UIFont
         let returnKeyType: UIReturnKeyType?
         let clearsOnInsertion: Bool
+        let shouldDisplayAccessoryView: Bool
         let autocorrection: UITextAutocorrectionType
         let spellCheck: UITextSpellCheckingType
         let truncationMode: NSLineBreakMode

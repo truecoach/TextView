@@ -25,6 +25,7 @@ public struct TextView: View {
     var font: UIFont = .preferredFont(forTextStyle: .body)
     var returnKeyType: UIReturnKeyType?
     var clearsOnInsertion: Bool = false
+    var shouldDisplayAccessoryView: Bool = false
     var autocorrection: UITextAutocorrectionType = .default
     var spellCheck: UITextSpellCheckingType = .default
     var truncationMode: NSLineBreakMode = .byTruncatingTail
@@ -100,6 +101,7 @@ public struct TextView: View {
             font: font,
             returnKeyType: returnKeyType,
             clearsOnInsertion: clearsOnInsertion,
+            shouldDisplayAccessoryView: shouldDisplayAccessoryView,
             autocorrection: autocorrection,
             spellCheck: spellCheck,
             truncationMode: truncationMode,
