@@ -12,12 +12,14 @@ extension TextView.Representable {
         var onCommit: (() -> Void)?
         var onEditingChanged: ((TextViewProtocol) -> Void)?
         var shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?
+        var maxNumberOfCharacters: Int
 
         init(text: Binding<NSAttributedString>,
              calculatedHeight: Binding<CGFloat>,
              shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?,
              onEditingChanged: ((TextViewProtocol) -> Void)?,
-             onCommit: (() -> Void)?
+             onCommit: (() -> Void)?,
+             maxNumberOfCharacters: Int
         ) {
             textView = UIKitTextView()
             textView.backgroundColor = .clear
@@ -28,6 +30,7 @@ extension TextView.Representable {
             self.shouldEditInRange = shouldEditInRange
             self.onEditingChanged = onEditingChanged
             self.onCommit = onCommit
+            self.maxNumberOfCharacters = maxNumberOfCharacters
 
             super.init()
             textView.delegate = self
@@ -47,15 +50,17 @@ extension TextView.Representable {
         }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if shouldEditInRange != nil {
+                let currentText = textView.text ?? ""
+                let newLength = currentText.count + text.count - range.length
+                return newLength <= maxNumberOfCharacters // Ensure the new length is within the limit
+            }
+
             if onCommit != nil, text == "\n" {
                 onCommit?()
                 originalText = NSAttributedString(attributedString: textView.attributedText)
                 textView.resignFirstResponder()
                 return false
-            }
-
-            if let shouldEditInRange = shouldEditInRange {
-                return shouldEditInRange(Range(range, in: text), text)
             }
 
             return true
@@ -67,7 +72,6 @@ extension TextView.Representable {
                 text.wrappedValue = originalText
             }
         }
-
     }
 
 }

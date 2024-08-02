@@ -24,6 +24,7 @@ extension TextView {
         let enablesReturnKeyAutomatically: Bool?
         var autoDetectionTypes: UIDataDetectorTypes = []
         var allowsRichText: Bool
+        var maxNumberOfCharacters: Int
 
         var onEditingChanged: ((TextViewProtocol) -> Void)?
         var shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?
@@ -43,7 +44,8 @@ extension TextView {
                 calculatedHeight: $calculatedHeight,
                 shouldEditInRange: shouldEditInRange,
                 onEditingChanged: onEditingChanged,
-                onCommit: onCommit
+                onCommit: onCommit,
+                maxNumberOfCharacters: maxNumberOfCharacters
             )
         }
 

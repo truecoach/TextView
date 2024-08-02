@@ -77,6 +77,22 @@ public extension TextView {
         return view
     }
 
+    /// Specifies that shoud edit the text or not for particular range
+    /// - Parameter alignment: The text alignment
+    func shouldEditTextInRange(_ shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?) -> TextView {
+        var view = self
+        view.shouldEditInRange = shouldEditInRange
+        return view
+    }
+
+    /// Specifies that shoud edit the text or not for particular range
+    /// - Parameter alignment: The text alignment
+    func maxNumberOfCharactersInText(_ maxNumberOfCharacters: Int) -> TextView {
+        var view = self
+        view.maxNumberOfCharacters = maxNumberOfCharacters
+        return view
+    }
+
     /// Specifies the font to apply to the text
     /// - Parameter font: The font to apply
     func font(_ font: UIFont) -> TextView {
