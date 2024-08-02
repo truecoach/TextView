@@ -35,6 +35,9 @@ extension TextView.Representable {
 
         func textViewDidBeginEditing(_ textView: UITextView) {
             originalText = text.wrappedValue
+            DispatchQueue.main.async {
+                textView.selectedRange = NSRange(location: textView.text.count, length: 0)
+            }
         }
 
         func textViewDidChange(_ textView: UITextView) {
