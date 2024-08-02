@@ -15,7 +15,7 @@ public struct TextView: View {
     @State private var calculatedHeight: CGFloat = 44
 
     private var onEditingChanged: ((TextViewProtocol) -> Void)?
-    private var shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?
+    var shouldEditInRange: ((Range<String.Index>?, String) -> Bool)?
     private var onCommit: (() -> Void)?
 
     var placeholderView: AnyView?
@@ -36,6 +36,7 @@ public struct TextView: View {
     var autoDetectionTypes: UIDataDetectorTypes = []
     var allowRichText: Bool
     var alignment: Alignment = .center
+    var maxNumberOfCharacters: Int  // Maximum character limit
 
     /// Makes a new TextView with the specified configuration
     /// - Parameters:
@@ -44,11 +45,11 @@ public struct TextView: View {
     ///   - onEditingChanged: A closure that's called after an edit has been applied
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<String>,
-         lineSpacing: CGFloat = 0,
-         shouldEditInRange: ((Range<String.Index>?, String) -> Bool)? = nil,
-         onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
-         onCommit: (() -> Void)? = nil
-    ) {
+                lineSpacing: CGFloat = 0,
+                shouldEditInRange: ((Range<String.Index>?, String) -> Bool)? = nil,
+                onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
+                onCommit: (() -> Void)? = nil,
+                maxNumberOfCharacters: Int) {
         let style = NSMutableParagraphStyle()
         style.lineSpacing = lineSpacing
         let attributes = [NSAttributedString.Key.paragraphStyle : style]
@@ -66,6 +67,7 @@ public struct TextView: View {
         self.onCommit = onCommit
         self.shouldEditInRange = shouldEditInRange
         self.onEditingChanged = onEditingChanged
+        self.maxNumberOfCharacters = maxNumberOfCharacters
 
         allowRichText = false
     }
@@ -77,8 +79,9 @@ public struct TextView: View {
     ///   - onCommit: If this is provided, the field will automatically lose focus when the return key is pressed
     public init(_ text: Binding<NSAttributedString>,
                 onEditingChanged: ((TextViewProtocol) -> Void)? = nil,
-                onCommit: (() -> Void)? = nil
-    ) {
+                shouldEditInRange: ((Range<String.Index>?, String) -> Bool)? = nil,
+                onCommit: (() -> Void)? = nil,
+                maxNumberOfCharacters: Int = 500) {
         _text = text
         _isEmpty = Binding(
             get: { text.wrappedValue.string.isEmpty },
@@ -87,6 +90,8 @@ public struct TextView: View {
 
         self.onCommit = onCommit
         self.onEditingChanged = onEditingChanged
+        self.shouldEditInRange = shouldEditInRange
+        self.maxNumberOfCharacters = maxNumberOfCharacters
 
         allowRichText = true
     }
@@ -110,7 +115,8 @@ public struct TextView: View {
             isScrollingEnabled: isScrollingEnabled,
             enablesReturnKeyAutomatically: enablesReturnKeyAutomatically,
             autoDetectionTypes: autoDetectionTypes,
-            allowsRichText: allowRichText,
+            allowsRichText: allowRichText, 
+            maxNumberOfCharacters: maxNumberOfCharacters,
             onEditingChanged: onEditingChanged,
             shouldEditInRange: shouldEditInRange,
             onCommit: onCommit
